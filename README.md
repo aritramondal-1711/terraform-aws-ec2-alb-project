@@ -104,22 +104,8 @@ Only hosts inside the existing subnet can SSH into the newly created instances �
 
 ## Repository Structure
 
-```
-terraform-aws-vpc-peering-alb/
-├── provider.tf
-├── variables.tf
-├── outputs.tf
-├── vpc.tf
-├── subnet.tf
-├── peering.tf
-├── security_group.tf
-├── ec2.tf
-├── load_balancer.tf
-├── s3.tf
-├── routes.tf
-├── terraform.tfvars
-└── README.md
-```
+<img width="531" height="481" alt="image" src="https://github.com/user-attachments/assets/e5d92fce-b1de-40e8-acf3-8089e13b5e26" />
+
 
 ---
 
@@ -145,19 +131,6 @@ terraform-aws-vpc-peering-alb/
 
 ---
 
-## Future Enhancements
-
-- [ ] Convert to reusable Terraform modules
-- [ ] Migrate to remote state (S3 + DynamoDB locking)
-- [ ] Implement Auto Scaling Groups
-- [ ] Add ACM SSL certificates and enforce HTTPS
-- [ ] Add CloudWatch monitoring and alarms
-- [ ] CI/CD pipeline via GitHub Actions
-- [ ] Introduce private subnets + NAT Gateway
-- [ ] Deploy a sample web application to the target group
-
----
-
 ## Author
 
 **Aritra Mondal**
@@ -165,14 +138,6 @@ Linux Administrator transitioning into DevOps/Cloud Engineering — RHCSA, RHCE,
 
 Terraform learning project demonstrating AWS networking, VPC peering, EC2 provisioning, Application Load Balancers, and Infrastructure as Code best practices. 🚀
 
-
-
-
-<img width="1090" height="337" alt="image" src="https://github.com/user-attachments/assets/1d466c79-de5d-4e63-8a23-72dbaff92cb3" />
-<img width="1090" height="364" alt="image" src="https://github.com/user-attachments/assets/a027ee60-256f-49bf-aa2a-d1af2d2a5991" />
-<img width="1090" height="279" alt="image" src="https://github.com/user-attachments/assets/2772b94e-3f88-44eb-b5c3-f1b09d11fc3b" />
-<img width="1090" height="218" alt="image" src="https://github.com/user-attachments/assets/cb096241-af10-42f1-8a50-a0e0d60579ab" />
-<img width="1090" height="238" alt="image" src="https://github.com/user-attachments/assets/b9a22d74-df3a-4920-a50e-54fc6a85ec67" />
 
 
 
