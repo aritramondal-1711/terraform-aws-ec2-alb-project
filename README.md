@@ -1,4 +1,4 @@
-## Terraform AWS VPC Peering + ALB
+# Terraform AWS VPC Peering + ALB
 
 Infrastructure-as-Code project provisioning an isolated AWS VPC, peering it to an existing VPC, and exposing EC2 workloads through a multi-AZ Application Load Balancer — built entirely with Terraform.
 
@@ -28,82 +28,15 @@ This project provisions a complete AWS network stack using Terraform while integ
 
 ### High-Level Architecture
 
-```mermaid
-flowchart LR
-    subgraph Existing["Existing AWS Environment"]
-        EIGW["Internet Gateway"]
-        ESubnet["Existing Subnet"]
-        EHost["Existing EC2 Host"]
-        EIGW --> ESubnet --> EHost
-    end
+![Architecture Overview](diagrams/architecture-overview.svg)
 
-    subgraph New["New VPC (Terraform-Managed)"]
-        subgraph AppSubnet["Application Subnet"]
-            EC1["EC2-1"]
-            EC2i["EC2-2"]
-            EC3["EC2-3"]
-        end
-        subgraph PubSubnets["Public Subnets (Multi-AZ)"]
-            PubA["Public Subnet AZ-a"]
-            PubB["Public Subnet AZ-b"]
-        end
-        NIGW["Internet Gateway"]
-        ALB["Application Load Balancer"]
-        TG["Target Group"]
-        S3["S3 Bucket - ALB Logs"]
-
-        PubA --- ALB
-        PubB --- ALB
-        NIGW --> PubA
-        NIGW --> PubB
-        ALB --> TG
-        TG --> EC1
-        TG --> EC2i
-        TG --> EC3
-        ALB -. access logs .-> S3
-    end
-
-    Existing <-->|VPC Peering| New
-
-    Internet(("Internet Users")) --> ALB
-```
-
-### Network & Routing Detail
-
-```mermaid
-flowchart TB
-    User(("Client")) -->|HTTP| ALB["Application Load Balancer<br/>(Public Subnets, Multi-AZ)"]
-    ALB --> TG["Target Group<br/>Health Check: HTTP /"]
-    TG -->|healthy targets only| EC1["EC2-1"]
-    TG --> EC2i["EC2-2"]
-    TG --> EC3["EC2-3"]
-
-    EC1 & EC2i & EC3 -.->|Route Table:<br/>Existing Subnet → Peering| Peer["VPC Peering Connection"]
-    Peer -.-> ExistingHost["Existing EC2 Host<br/>(Existing Subnet)"]
-
-    ExistingHost -->|SSH 22/TCP<br/>from Existing Subnet CIDR only| EC1
-    ExistingHost -.->|denied| Deny["0.0.0.0/0 ❌"]
-
-    ALB -->|Access Logs| S3["S3 Bucket"]
-```
+*Left: the existing AWS environment. Right: the new VPC that Terraform creates. The two are joined by a private VPC Peering connection — traffic never touches the public internet. The ALB sits in public subnets and fans out to three EC2 instances; access logs are shipped to S3.*
 
 ### Deployment Flow
 
-```mermaid
-flowchart TD
-    A["1. Read Existing VPC Data"] --> B["2. Create New VPC"]
-    B --> C["3. Create Subnets<br/>(App + 2x Public)"]
-    C --> D["4. Create Security Groups"]
-    D --> E["5. Establish VPC Peering"]
-    E --> F["6. Configure Route Tables"]
-    F --> G["7. Launch EC2 Instances<br/>(for_each)"]
-    G --> H["8. Create ALB"]
-    H --> I["9. Create Target Group"]
-    I --> J["10. Register Targets"]
-    J --> K["11. Configure Health Checks"]
-    K --> L["12. Create S3 Logging Bucket"]
-    L --> M["13. Enable ALB Access Logging"]
-```
+![Deployment Flow](diagrams/deployment-flow.svg)
+
+*The 13 underlying Terraform resource creations, grouped into six logical phases, in the order they happen.*
 
 ---
 
@@ -231,6 +164,7 @@ terraform-aws-vpc-peering-alb/
 Linux Administrator transitioning into DevOps/Cloud Engineering — RHCSA, RHCE, AZ-900, AZ-104 certified.
 
 Terraform learning project demonstrating AWS networking, VPC peering, EC2 provisioning, Application Load Balancers, and Infrastructure as Code best practices. 🚀
+
 
 
 <img width="1090" height="337" alt="image" src="https://github.com/user-attachments/assets/1d466c79-de5d-4e63-8a23-72dbaff92cb3" />
