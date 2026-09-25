@@ -1,4 +1,4 @@
-# Terraform AWS VPC Peering + ALB
+# Terraform AWS RC2 Instance : VPC Peering + ALB
 
 Infrastructure-as-Code project provisioning an isolated AWS VPC, peering it to an existing VPC, and exposing EC2 workloads through a multi-AZ Application Load Balancer — built entirely with Terraform.
 
