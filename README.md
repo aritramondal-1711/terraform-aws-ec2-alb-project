@@ -28,14 +28,14 @@ This project provisions a complete AWS network stack using Terraform while integ
 
 ### High-Level Architecture
 
-<img width="1860" height="967" alt="image" src="https://github.com/user-attachments/assets/f242c6e4-b686-42cf-a0d4-e432b22ce3c6" />
-
+<img width="1632" height="860" alt="image" src="https://github.com/user-attachments/assets/832ce6f5-7de7-42f2-af82-9c79c6ff88e9" />
 
 *Left: the existing AWS environment. Right: the new VPC that Terraform creates. The two are joined by a private VPC Peering connection — traffic never touches the public internet. The ALB sits in public subnets and fans out to three EC2 instances; access logs are shipped to S3.*
 
 ### Deployment Flow
 
-![Deployment Flow](diagrams/deployment-flow.svg)
+<img width="1433" height="845" alt="image" src="https://github.com/user-attachments/assets/f6658d78-0b7c-4b93-af8e-94f05eba4840" />
+
 
 *The 13 underlying Terraform resource creations, grouped into six logical phases, in the order they happen.*
 
