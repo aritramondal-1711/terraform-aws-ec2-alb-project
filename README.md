@@ -28,6 +28,10 @@ This project provisions a complete AWS network stack using Terraform while integ
 
 ### High-Level Architecture
 
+![Architecture Overview](diagrams/architecture-overview.svg)
+
+*Left: the existing AWS environment. Right: the new VPC that Terraform creates. The two are joined by a private VPC Peering connection — traffic never touches the public internet. The ALB sits in public subnets and fans out to three EC2 instances; access logs are shipped to S3.*
+
 ### Deployment Flow
 
 ![Deployment Flow](diagrams/deployment-flow.svg)
@@ -160,6 +164,7 @@ terraform-aws-vpc-peering-alb/
 Linux Administrator transitioning into DevOps/Cloud Engineering — RHCSA, RHCE, AZ-900, AZ-104 certified.
 
 Terraform learning project demonstrating AWS networking, VPC peering, EC2 provisioning, Application Load Balancers, and Infrastructure as Code best practices. 🚀
+
 
 
 
