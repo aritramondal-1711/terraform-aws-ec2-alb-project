@@ -28,7 +28,8 @@ This project provisions a complete AWS network stack using Terraform while integ
 
 ### High-Level Architecture
 
-![Architecture Overview](diagrams/architecture-overview.svg)
+<img width="1860" height="967" alt="image" src="https://github.com/user-attachments/assets/f242c6e4-b686-42cf-a0d4-e432b22ce3c6" />
+
 
 *Left: the existing AWS environment. Right: the new VPC that Terraform creates. The two are joined by a private VPC Peering connection — traffic never touches the public internet. The ALB sits in public subnets and fans out to three EC2 instances; access logs are shipped to S3.*
 
